@@ -15,6 +15,7 @@ import {
   Home,
   SlidersHorizontal,
   Lightbulb,
+  Mail,
 } from "lucide-react";
 import { darkModeAtom } from "@/basic/atom";
 import { useAtom } from "jotai";
@@ -192,6 +193,17 @@ const Header = () => {
                           <Lightbulb />
                         </span>
                         <span>ヒント</span>
+                      </div>
+                    </MenubarItem>
+                    <MenubarItem>
+                      <div
+                        className="flex justify-between w-full"
+                        onClick={() => router.push("/login")}
+                      >
+                        <span>
+                          <Mail />
+                        </span>
+                        <span>リクエスト</span>
                       </div>
                     </MenubarItem>
                     <MenubarItem>
