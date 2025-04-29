@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import {
+  Bell,
   Search,
   Heart,
   Menu,
@@ -60,6 +61,14 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const navigationItems = [
+    { name: "ホーム", icon: Home, path: "/arts" },
+    { name: "投稿", icon: Hand, path: "/posts" },
+    { name: "おすすめ", icon: ThumbsUp, path: "/recommendations" },
+    // 必要に応じて簡単に項目を追加できます
+    { name: '通知', icon: Bell, path: '/notifications' },
+  ];
+
   return (
     <header className="bg-indigo-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,27 +85,17 @@ const Header = () => {
 
           {/* ナビゲーション - デスクトップ */}
           <div className="hidden md:flex space-x-8">
-            <button
-              className="text-indigo-600 hover:text-indigo-800 px-3 py-2 rounded-md font-medium"
-              onClick={() => router.push("/arts")}
-            >
-              <Home className="inline w-5 h-5 mr-1" />
-              <span>ホーム</span>
-            </button>
-            <button className="text-indigo-600 hover:text-indigo-800 px-3 py-2 rounded-md font-medium">
-              <ThumbsUp className="inline w-5 h-5 mr-1" />
-              <span>おすすめ</span>
-            </button>
-            <button className="text-indigo-600 hover:text-indigo-800 px-3 py-2 rounded-md font-medium">
-              <Share className="inline w-5 h-5 mr-1" />
-              <span>シェア</span>
-            </button>
-            <button className="text-indigo-600 hover:text-indigo-800 px-3 py-2 rounded-md font-medium">
-              <Hand className="inline w-5 h-5 mr-1" />
-              <span>投稿</span>
-            </button>
+            {navigationItems.map((item) => (
+              <button
+                key={item.name}
+                className="text-indigo-600 hover:text-indigo-800 px-3 py-2 rounded-md font-medium"
+                onClick={() => router.push(item.path)}
+              >
+                <item.icon className="inline w-5 h-5 mr-1" />
+                <span>{item.name}</span>
+              </button>
+            ))}
           </div>
-
           {/* ロゴ */}
           <div className="flex justify-center">
             <Link href={"/arts"}>
@@ -133,9 +132,6 @@ const Header = () => {
             </DialogContent>
           </Dialog>
 
-          {/* <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <Search className="h-5 w-5 text-gray-400" />
-          </div> */}
           {/* 右側セクション */}
           <div className="flex items-center space-x-4">
             {/* 検索 */}
@@ -169,6 +165,7 @@ const Header = () => {
                     </MenubarItem>
                     <MenubarItem>投稿 Art</MenubarItem>
                     <MenubarItem>いいね欄一覧</MenubarItem>
+                    <MenubarItem>通知</MenubarItem>
                     <MenubarItem>設定</MenubarItem>
                     <MenubarItem disabled>New Incognito Window</MenubarItem>
                     <MenubarSeparator />
